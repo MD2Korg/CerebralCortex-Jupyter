@@ -54,4 +54,8 @@ COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
 RUN pip3 install matplotlib
+
+RUN mkdir /cc_data
+RUN chmod 777 /cc_data
+
 VOLUME /srv/jupyterhub/conf /cc_data
