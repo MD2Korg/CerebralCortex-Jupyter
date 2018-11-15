@@ -55,6 +55,9 @@ RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
 RUN pip3 install matplotlib
 
+HEALTHCHECK --interval=1m --timeout=3s --start-period=30s \
+CMD wget --quiet --tries=1 http://localhost:8000/jupyterhub/ || exit 1
+
 RUN mkdir /cc_data
 RUN chmod 777 /cc_data
 
