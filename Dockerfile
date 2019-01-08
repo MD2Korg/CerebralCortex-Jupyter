@@ -55,7 +55,7 @@ RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
 RUN pip3 install matplotlib
 
-RUN git clone https://github.com/MD2Korg/CerebralCortex-DataAnalysis.git /home/md2k/DataAnalysis
+RUN git clone https://github.com/MD2Korg/CerebralCortex-DataAnalysis.git /home/md2k/DataAnalysis && chown -R md2k /home/md2k/DataAnalysis/
 
 RUN pip3 install -r /home/md2k/DataAnalysis/requirements.txt
 
