@@ -39,10 +39,10 @@ ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 
 # Install Cerebral Cortex libraries for use in the notebook environment
-RUN git clone https://github.com/MD2Korg/CerebralCortex -b 2.3.0 \
-    && cd CerebralCortex \
+RUN git clone https://github.com/MD2Korg/CerebralCortex-Kernel.git -b 2.3.0 \
+    && cd CerebralCortex-Kernel \
     && python3 setup.py install \
-    && cd .. && rm -rf CerebralCortex
+    && cd .. && rm -rf CerebralCortex-Kernel
 
 
 RUN pip install --upgrade jupyterhub
