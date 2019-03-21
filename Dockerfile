@@ -72,7 +72,7 @@ RUN jupyter labextension install nbdime-jupyterlab --no-build && \
 HEALTHCHECK --interval=1m --timeout=3s --start-period=30s \
 CMD wget --quiet --tries=1 http://localhost:8000/jupyterhub/ || exit 1
 
-RUN mkdir /cc_data
-RUN chmod 777 /cc_data
+RUN mkdir /data
+RUN chmod 777 /data
 
-VOLUME /srv/jupyterhub/conf /cc_data
+VOLUME /srv/jupyterhub/conf /data
