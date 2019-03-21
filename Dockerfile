@@ -28,7 +28,7 @@ ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
 ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 
-RUN pip install cerebralcortex-kernel==3.0.0.post20
+RUN pip install cerebralcortex-kernel==3.0.0.post21
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
     && jupyter nbextension enable --py widgetsnbextension \
