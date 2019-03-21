@@ -28,13 +28,7 @@ ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
 ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 
-# Install Cerebral Cortex libraries for use in the notebook environment
-RUN git clone https://github.com/MD2Korg/CerebralCortex-Kernel.git -b 2.4.0 \
-    && cd CerebralCortex-Kernel \
-    && python3 setup.py install \
-    && cd .. && rm -rf CerebralCortex-Kernel
-
-
+RUN pip install cerebralcortex-kernel==3.0.0.post20
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
     && jupyter nbextension enable --py widgetsnbextension \
@@ -47,9 +41,6 @@ RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
 RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seaborn ipyleaflet qgrid
 
-RUN git clone https://github.com/MD2Korg/CerebralCortex-DataAnalysis.git /home/md2k/DataAnalysis && chown -R md2k /home/md2k/DataAnalysis/
-
-RUN pip3 install -r /home/md2k/DataAnalysis/requirements.txt
 
 
 RUN jupyter labextension install nbdime-jupyterlab --no-build && \
@@ -81,7 +72,7 @@ RUN jupyter labextension install nbdime-jupyterlab --no-build && \
 HEALTHCHECK --interval=1m --timeout=3s --start-period=30s \
 CMD wget --quiet --tries=1 http://localhost:8000/jupyterhub/ || exit 1
 
-RUN mkdir /cc_data
-RUN chmod 777 /cc_data
+RUN mkdir /data
+RUN chmod 777 /data
 
-VOLUME /srv/jupyterhub/conf /cc_data
+VOLUME /srv/jupyterhub/conf /data
