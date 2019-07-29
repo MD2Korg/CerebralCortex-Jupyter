@@ -44,6 +44,7 @@ RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seabor
 
 
 RUN jupyter labextension install nbdime-jupyterlab --no-build && \
+    jupyter labextension install @jupyterlab/toc --no-build && \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
     jupyter labextension install jupyterlab_bokeh --no-build && \
     jupyter labextension install bqplot --no-build && \
