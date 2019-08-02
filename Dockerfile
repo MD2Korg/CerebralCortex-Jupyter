@@ -9,7 +9,7 @@ RUN apt-get -yqq update && \
 
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION 2.4.0
+ENV APACHE_SPARK_VERSION 2.4.3
 ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
