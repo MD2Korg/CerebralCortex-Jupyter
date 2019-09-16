@@ -27,6 +27,15 @@ ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M -
 ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
 ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
+ENV HADOOP_HOME	   /opt/hadoop
+
+RUN \
+  wget http://apache.mirrors.tds.net/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz && \
+  tar -xzf hadoop-3.1.2.tar.gz && \
+  mv hadoop-3.1.2 $HADOOP_HOME && \
+  echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+  echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
+
 
 RUN pip install cerebralcortex-kernel==3.0.0.post26
 RUN pip install --upgrade jupyterhub
