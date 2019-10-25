@@ -9,7 +9,7 @@ RUN apt-get -yqq update && \
 
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION 2.4.3
+ENV APACHE_SPARK_VERSION 2.4.4
 ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
@@ -68,13 +68,14 @@ RUN jupyter labextension install nbdime-jupyterlab --no-build && \
     jupyter labextension install jupyter-matplotlib --no-build && \
     jupyter labextension install jupyterlab-drawio --no-build && \
     jupyter labextension install jupyter-leaflet --no-build && \
-    jupyter labextension install qgrid --no-build && \
-    jupyter lab build && \
-        jupyter lab clean && \
-        jlpm cache clean && \
-        npm cache clean --force && \
-        rm -rf $HOME/.node-gyp && \
-        rm -rf $HOME/.local
+    jupyter labextension install qgrid --no-build
+
+RUN jupyter lab build && \
+    jupyter lab clean && \
+    jlpm cache clean && \
+    npm cache clean --force && \
+    rm -rf $HOME/.node-gyp && \
+    rm -rf $HOME/.local
 
 
 
