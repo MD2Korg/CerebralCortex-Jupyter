@@ -31,8 +31,8 @@ ENV HADOOP_HOME	   /opt/hadoop
 
 RUN \
   wget http://apache.mirrors.tds.net/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz && \
-    tar -xzf hadoop-3.1.3.tar.gz && \
-    mv hadoop-3.1.3 $HADOOP_HOME && \
+  tar -xzf hadoop-3.1.3.tar.gz && \
+  mv hadoop-3.1.3 $HADOOP_HOME && \
   echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
@@ -72,8 +72,9 @@ RUN jupyter labextension install nbdime-jupyterlab --no-build && \
 
 RUN jupyter lab build && \
     jupyter lab clean && \
-    jlpm cache clean && \
-    npm cache clean --force && \
+    jlpm cache clean
+
+RUN npm cache clean --force && \
     rm -rf $HOME/.node-gyp && \
     rm -rf $HOME/.local
 
