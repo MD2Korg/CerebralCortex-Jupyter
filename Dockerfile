@@ -36,7 +36,6 @@ RUN \
   echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
-
 RUN pip install cerebralcortex-kernel==3.1.0.post2
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
