@@ -30,14 +30,14 @@ ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 ENV HADOOP_HOME	   /opt/hadoop
 
 RUN \
-  wget http://apache.mirrors.tds.net/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz && \
-  tar -xzf hadoop-3.1.2.tar.gz && \
-  mv hadoop-3.1.2 $HADOOP_HOME && \
+  wget http://apache.mirrors.tds.net/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz && \
+    tar -xzf hadoop-3.1.3.tar.gz && \
+    mv hadoop-3.1.3 $HADOOP_HOME && \
   echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
 
-RUN pip install cerebralcortex-kernel==3.1.0.post1
+RUN pip install cerebralcortex-kernel==3.1.0.post2
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
     && jupyter nbextension enable --py widgetsnbextension \
