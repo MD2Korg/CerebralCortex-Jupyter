@@ -50,24 +50,24 @@ RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seabor
 
 
 
-RUN jupyter labextension install nbdime-jupyterlab && \
-    jupyter labextension install @jupyterlab/toc && \
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
-    jupyter labextension install jupyterlab_bokeh && \
-    jupyter labextension install bqplot && \
-    jupyter labextension install @jupyterlab/vega3-extension && \
-    jupyter labextension install @jupyterlab/git && \
-    jupyter labextension install @jupyterlab/hub-extension && \
-    jupyter labextension install jupyterlab_tensorboard && \
-    jupyter labextension install jupyterlab-kernelspy && \
-    jupyter labextension install @jupyterlab/plotly-extension && \
-    jupyter labextension install jupyterlab-chart-editor && \
-    jupyter labextension install plotlywidget && \
-    jupyter labextension install @jupyterlab/latex && \
-    jupyter labextension install jupyter-matplotlib && \
-    jupyter labextension install jupyterlab-drawio && \
-    jupyter labextension install jupyter-leaflet && \
-    jupyter labextension install qgrid
+RUN jupyter labextension install nbdime-jupyterlab
+RUN jupyter labextension install @jupyterlab/toc
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install jupyterlab_bokeh
+RUN jupyter labextension install bqplot
+RUN jupyter labextension install @jupyterlab/vega3-extension
+RUN jupyter labextension install @jupyterlab/git
+RUN jupyter labextension install @jupyterlab/hub-extension
+RUN jupyter labextension install jupyterlab_tensorboard
+RUN jupyter labextension install jupyterlab-kernelspy
+RUN jupyter labextension install @jupyterlab/plotly-extension
+RUN jupyter labextension install jupyterlab-chart-editor
+RUN jupyter labextension install plotlywidget
+RUN jupyter labextension install @jupyterlab/latex
+RUN jupyter labextension install jupyter-matplotlib
+RUN jupyter labextension install jupyterlab-drawio
+RUN jupyter labextension install jupyter-leaflet
+RUN jupyter labextension install qgrid
 
 RUN jupyter lab build
 RUN jupyter lab clean && \
