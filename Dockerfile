@@ -62,7 +62,7 @@ RUN jupyter labextension install jupyterlab_tensorboard
 RUN jupyter labextension install jupyterlab-kernelspy
 RUN jupyter labextension install @jupyterlab/plotly-extension
 RUN jupyter labextension install jupyterlab-chart-editor
-RUN jupyter labextension install plotlywidget
+
 RUN jupyter labextension install @jupyterlab/latex
 RUN jupyter labextension install jupyter-matplotlib
 RUN jupyter labextension install jupyterlab-drawio
