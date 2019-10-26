@@ -9,7 +9,7 @@ RUN apt-get -yqq update && \
 
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION 2.4.4
+ENV APACHE_SPARK_VERSION 2.4.3
 ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
@@ -27,16 +27,8 @@ ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M -
 ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
 ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
-ENV HADOOP_HOME	   /opt/hadoop
 
-RUN \
-  wget http://apache.mirrors.tds.net/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz && \
-  tar -xzf hadoop-3.1.3.tar.gz && \
-  mv hadoop-3.1.3 $HADOOP_HOME && \
-  echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
-  echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
-
-RUN pip install cerebralcortex-kernel==3.1.0.post2
+RUN pip install cerebralcortex-kernel==3.0.0.post26
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
     && jupyter nbextension enable --py widgetsnbextension \
@@ -68,15 +60,13 @@ RUN jupyter labextension install nbdime-jupyterlab --no-build && \
     jupyter labextension install jupyter-matplotlib --no-build && \
     jupyter labextension install jupyterlab-drawio --no-build && \
     jupyter labextension install jupyter-leaflet --no-build && \
-    jupyter labextension install qgrid --no-build
-
-RUN jupyter lab build && \
-    jupyter lab clean && \
-    jlpm cache clean
-
-RUN npm cache clean --force && \
-    rm -rf $HOME/.node-gyp && \
-    rm -rf $HOME/.local
+    jupyter labextension install qgrid --no-build && \
+    jupyter lab build && \
+        jupyter lab clean && \
+        jlpm cache clean && \
+        npm cache clean --force && \
+        rm -rf $HOME/.node-gyp && \
+        rm -rf $HOME/.local
 
 
 
