@@ -27,7 +27,13 @@ ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M -
 ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
 ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
+ENV HADOOP_HOME	   /opt/hadoop
 
+RUN wget http://apache.mirrors.tds.net/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz && \
+  tar -xzf hadoop-3.1.3.tar.gz && \
+  mv hadoop-3.1.3 $HADOOP_HOME && \
+  echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+  echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
 RUN pip install cerebralcortex-kernel==3.1.0.post2
 RUN pip install --upgrade jupyterhub
@@ -43,25 +49,6 @@ RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seaborn ipyleaflet qgrid
 
 
-
-RUN jupyter labextension install nbdime-jupyterlab --no-build && \
-    jupyter labextension install @jupyterlab/toc --no-build && \
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
-    jupyter labextension install jupyterlab_bokeh --no-build && \
-    jupyter labextension install bqplot --no-build && \
-    jupyter labextension install @jupyterlab/vega3-extension --no-build && \
-    jupyter labextension install @jupyterlab/git --no-build && \
-    jupyter labextension install @jupyterlab/hub-extension --no-build && \
-    jupyter labextension install jupyterlab_tensorboard --no-build && \
-    jupyter labextension install jupyterlab-kernelspy --no-build && \
-    jupyter labextension install @jupyterlab/plotly-extension --no-build && \
-    jupyter labextension install jupyterlab-chart-editor --no-build && \
-    jupyter labextension install plotlywidget --no-build && \
-    jupyter labextension install @jupyterlab/latex --no-build && \
-    jupyter labextension install jupyter-matplotlib --no-build && \
-    jupyter labextension install jupyterlab-drawio --no-build && \
-    jupyter labextension install jupyter-leaflet --no-build && \
-    jupyter labextension install qgrid --no-build
 
 RUN jupyter lab build
 RUN jupyter lab clean && \
