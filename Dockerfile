@@ -50,23 +50,24 @@ RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seabor
 
 
 
-RUN jupyter labextension install nbdime-jupyterlab --no-build && \
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
-    jupyter labextension install jupyterlab_bokeh --no-build && \
-    jupyter labextension install bqplot --no-build && \
-    jupyter labextension install @jupyterlab/vega3-extension --no-build && \
-    jupyter labextension install @jupyterlab/git --no-build && \
-    jupyter labextension install @jupyterlab/hub-extension --no-build && \
-    jupyter labextension install jupyterlab_tensorboard --no-build && \
-    jupyter labextension install jupyterlab-kernelspy --no-build && \
-    jupyter labextension install @jupyterlab/plotly-extension --no-build && \
-    jupyter labextension install jupyterlab-chart-editor --no-build && \
-    jupyter labextension install plotlywidget --no-build && \
-    jupyter labextension install @jupyterlab/latex --no-build && \
-    jupyter labextension install jupyter-matplotlib --no-build && \
-    jupyter labextension install jupyterlab-drawio --no-build && \
-    jupyter labextension install jupyter-leaflet --no-build && \
-    jupyter labextension install qgrid --no-build
+RUN jupyter labextension install nbdime-jupyterlab && \
+    jupyter labextension install @jupyterlab/toc && \
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
+    jupyter labextension install jupyterlab_bokeh && \
+    jupyter labextension install bqplot && \
+    jupyter labextension install @jupyterlab/vega3-extension && \
+    jupyter labextension install @jupyterlab/git && \
+    jupyter labextension install @jupyterlab/hub-extension && \
+    jupyter labextension install jupyterlab_tensorboard && \
+    jupyter labextension install jupyterlab-kernelspy && \
+    jupyter labextension install @jupyterlab/plotly-extension && \
+    jupyter labextension install jupyterlab-chart-editor && \
+    jupyter labextension install plotlywidget && \
+    jupyter labextension install @jupyterlab/latex && \
+    jupyter labextension install jupyter-matplotlib && \
+    jupyter labextension install jupyterlab-drawio && \
+    jupyter labextension install jupyter-leaflet && \
+    jupyter labextension install qgrid
 
 RUN jupyter lab build
 RUN jupyter lab clean && \
