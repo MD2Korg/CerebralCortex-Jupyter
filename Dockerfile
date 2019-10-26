@@ -51,19 +51,19 @@ RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seabor
 
 
 RUN jupyter labextension install nbdime-jupyterlab
-RUN jupyter labextension install jupyterlab/toc
-RUN jupyter labextension install jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install @jupyterlab/toc
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 RUN jupyter labextension install jupyterlab_bokeh
 RUN jupyter labextension install bqplot
-RUN jupyter labextension install jupyterlab/vega3-extension
-RUN jupyter labextension install jupyterlab/git
-RUN jupyter labextension install jupyterlab/hub-extension
+RUN jupyter labextension install @jupyterlab/vega3-extension
+RUN jupyter labextension install @jupyterlab/git
+RUN jupyter labextension install @jupyterlab/hub-extension
 RUN jupyter labextension install jupyterlab_tensorboard
 RUN jupyter labextension install jupyterlab-kernelspy
-RUN jupyter labextension install jupyterlab/plotly-extension
+RUN jupyter labextension install @jupyterlab/plotly-extension
 RUN jupyter labextension install jupyterlab-chart-editor
 RUN jupyter labextension install plotlywidget
-RUN jupyter labextension install jupyterlab/latex
+RUN jupyter labextension install @jupyterlab/latex
 RUN jupyter labextension install jupyter-matplotlib
 RUN jupyter labextension install jupyterlab-drawio
 RUN jupyter labextension install jupyter-leaflet
