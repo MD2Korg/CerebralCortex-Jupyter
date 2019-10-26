@@ -9,7 +9,7 @@ RUN apt-get -yqq update && \
 
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION 2.4.3
+ENV APACHE_SPARK_VERSION 2.4.4
 ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
@@ -28,7 +28,8 @@ ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
 ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 
-RUN pip install cerebralcortex-kernel==3.0.0.post26
+
+RUN pip install cerebralcortex-kernel==3.1.0.post2
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
     && jupyter nbextension enable --py widgetsnbextension \
@@ -60,13 +61,15 @@ RUN jupyter labextension install nbdime-jupyterlab --no-build && \
     jupyter labextension install jupyter-matplotlib --no-build && \
     jupyter labextension install jupyterlab-drawio --no-build && \
     jupyter labextension install jupyter-leaflet --no-build && \
-    jupyter labextension install qgrid --no-build && \
-    jupyter lab build && \
-        jupyter lab clean && \
-        jlpm cache clean && \
-        npm cache clean --force && \
-        rm -rf $HOME/.node-gyp && \
-        rm -rf $HOME/.local
+    jupyter labextension install qgrid --no-build
+
+RUN jupyter lab build
+RUN jupyter lab clean && \
+    jlpm cache clean
+
+RUN npm cache clean --force && \
+    rm -rf $HOME/.node-gyp && \
+    rm -rf $HOME/.local
 
 
 
