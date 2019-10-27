@@ -50,24 +50,24 @@ RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seabor
 
 
 
-RUN jupyter labextension install nbdime-jupyterlab
-RUN jupyter labextension install @jupyterlab/toc
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
-RUN jupyter labextension install jupyterlab_bokeh
-RUN jupyter labextension install bqplot
-RUN jupyter labextension install @jupyterlab/vega3-extension
-RUN jupyter labextension install @jupyterlab/git
-RUN jupyter labextension install @jupyterlab/hub-extension
-RUN jupyter labextension install jupyterlab_tensorboard
-RUN jupyter labextension install jupyterlab-kernelspy
-RUN jupyter labextension install @jupyterlab/plotly-extension
-RUN jupyter labextension install jupyterlab-chart-editor
-
-RUN jupyter labextension install @jupyterlab/latex
-RUN jupyter labextension install jupyter-matplotlib
-RUN jupyter labextension install jupyterlab-drawio
-RUN jupyter labextension install jupyter-leaflet
-RUN jupyter labextension install qgrid
+RUN jupyter labextension install nbdime-jupyterlab --no-build && \
+    jupyter labextension install @jupyterlab/toc --no-build && \
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
+    jupyter labextension install jupyterlab_bokeh --no-build && \
+    jupyter labextension install bqplot --no-build && \
+    jupyter labextension install @jupyterlab/vega3-extension --no-build && \
+    jupyter labextension install @jupyterlab/git --no-build && \
+    jupyter labextension install @jupyterlab/hub-extension --no-build && \
+    jupyter labextension install jupyterlab_tensorboard --no-build && \
+    jupyter labextension install jupyterlab-kernelspy --no-build && \
+    jupyter labextension install @jupyterlab/plotly-extension --no-build && \
+#    jupyter labextension install jupyterlab-chart-editor --no-build && \
+#    jupyter labextension install plotlywidget --no-build && \
+    jupyter labextension install @jupyterlab/latex --no-build && \
+    jupyter labextension install jupyter-matplotlib --no-build && \
+    jupyter labextension install jupyterlab-drawio --no-build && \
+    jupyter labextension install jupyter-leaflet --no-build && \
+    jupyter labextension install qgrid --no-build
 
 RUN jupyter lab build
 RUN jupyter lab clean && \
