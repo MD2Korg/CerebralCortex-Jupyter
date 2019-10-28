@@ -13,7 +13,8 @@ RUN apt-get -yqq update && \
 # ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
-RUN pip3 install wheel minio==2.2.4 pytz==2017.2 PyYAML==3.12 pyarrow==0.8.0 kafka influxdb==5.0.0 pympler scipy numpy py4j
+RUN pip install cerebralcortex-kernel==3.1.0.post2
+# RUN pip3 install wheel minio==2.2.4 pytz==2017.2 PyYAML==3.12 pyarrow==0.8.0 kafka influxdb==5.0.0 pympler scipy numpy py4j
 
 # RUN cd /tmp && \
 #         wget -q http://apache.cs.utah.edu/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
@@ -35,7 +36,7 @@ ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
 #   echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
 #   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
-RUN pip install cerebralcortex-kernel==3.1.0.post2
+
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
     && jupyter nbextension enable --py widgetsnbextension \
@@ -46,8 +47,7 @@ COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 
 RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
-# RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seaborn ipyleaflet qgrid
-
+RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seaborn ipyleaflet qgrid
 
 
 # RUN jupyter labextension install nbdime-jupyterlab --no-build && \
@@ -68,6 +68,25 @@ RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 #     jupyter labextension install jupyterlab-drawio --no-build && \
 #     jupyter labextension install jupyter-leaflet --no-build && \
 #     jupyter labextension install qgrid --no-build
+
+RUN jupyter labextension install nbdime-jupyterlab
+RUN jupyter labextension install @jupyterlab/toc
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install jupyterlab_bokeh
+RUN jupyter labextension install bqplot
+RUN jupyter labextension install @jupyterlab/vega3-extension
+RUN jupyter labextension install @jupyterlab/git
+RUN jupyter labextension install @jupyterlab/hub-extension
+RUN jupyter labextension install jupyterlab_tensorboard
+RUN jupyter labextension install jupyterlab-kernelspy
+RUN jupyter labextension install @jupyterlab/plotly-extension
+RUN jupyter labextension install jupyterlab-chart-editor
+RUN jupyter labextension install plotlywidget
+RUN jupyter labextension install @jupyterlab/latex
+RUN jupyter labextension install jupyter-matplotlib
+RUN jupyter labextension install jupyterlab-drawio
+RUN jupyter labextension install jupyter-leaflet
+RUN jupyter labextension install qgrid
 
 RUN jupyter lab build
 RUN jupyter lab clean && \
