@@ -37,7 +37,7 @@ RUN \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
 
-RUN pip install cerebralcortex-kernel==3.1.0.post3
+RUN pip install cerebralcortex-kernel==3.1.0.post4
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
     && jupyter nbextension enable --py widgetsnbextension \
