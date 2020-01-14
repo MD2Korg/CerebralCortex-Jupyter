@@ -9,10 +9,16 @@
  "display_name": "pySpark (Python 3)",
  "language": "python",
  "env": {
-  "SPARK_HOME": "/usr/local/spark",
-  "PYTHON_PATH": "/usr/local/spark/python/lib/py4j-0.10.4-src.zip:/usr/local/spark/python/",
-  "PYTHONSTARTUP": "/usr/local/spark/python/pyspark/shell.py",
-  "PYSPARK_SUBMIT_ARGS": "--master local[*] pyspark-shell",
-  "PYSPARK_PYTHON": "python3"
+  "HADOOP_HOME": "/opt/hadoop",
+  "HADOOP_CONF_HOME": "/opt/hadoop/etc/hadoop",
+  "HADOOP_CONF_DIR": "/opt/hadoop/etc/hadoop",
+  "ARROW_LIBHDFS_DIR": "/opt/hadoop/lib/native",
+  "JAVA_HOME": "/usr/lib/jvm/java-1.8.0",
+  "SPARK_HOME": "/usr/local/spark-3.0.0-preview",
+  "PYSPARK_PYTHON": "python3",
+  "PYTHON_PATH": "/usr/local/spark-3.0.0-preview/python/lib/py4j-0.10.8.1-src.zip:/usr/local/spark-3.0.0-preview/python/",
+  "PYTHONSTARTUP": "/usr/local/spark-3.0.0-preview/python/pyspark/shell.py",
+  "PYSPARK_SUBMIT_ARGS": "--master spark://dantooine10dot.memphis.edu:7077 pyspark-shell"
+
  }
 }

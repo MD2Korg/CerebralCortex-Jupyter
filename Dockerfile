@@ -9,7 +9,7 @@ RUN apt-get -yqq update && \
 
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION 2.4.4
+ENV APACHE_SPARK_VERSION 3.0.0-preview2
 ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
@@ -37,11 +37,14 @@ RUN \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
 
-RUN pip install cerebralcortex-kernel==3.1.0.post4
+RUN pip install cerebralcortex-kernel==3.1.1.post1
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
     && jupyter nbextension enable --py widgetsnbextension \
     && jupyter serverextension enable --py jupyterlab
+
+RUN cd spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}/python && \
+    python setup.py install
 
 RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
 COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
