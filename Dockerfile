@@ -13,8 +13,8 @@ ENV APACHE_SPARK_VERSION 3.0.0-preview2
 ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
-#RUN pip3 install wheel minio==2.2.4 pytz==2017.2 PyYAML==4.2b1 pyarrow==0.14.1 kafka influxdb==5.0.0 pympler scipy numpy py4j
-RUN pip3 install pypandoc
+RUN pip3 install wheel pypandoc minio==2.2.4 pytz==2017.2 PyYAML==4.2b1 pyarrow==0.14.1 kafka influxdb==5.0.0 pympler scipy numpy py4j
+#RUN pip3 install
 
 RUN cd /tmp && \
         apt-get update &&\
@@ -54,7 +54,7 @@ COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 
 RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
-RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seaborn ipyleaflet qgrid
+RUN pip3 install matplotlib sklearn ipywidgets gmaps plotly seaborn ipyleaflet qgrid
 
 
 
