@@ -18,7 +18,7 @@
   "PYSPARK_PYTHON": "python3",
   "PYTHON_PATH": "/usr/local/spark-3.0.0-preview2/python/lib/py4j-0.10.8.1-src.zip:/usr/local/spark-3.0.0-preview2/python/",
   "PYTHONSTARTUP": "/usr/local/spark-3.0.0-preview2/python/pyspark/shell.py",
-  "PYSPARK_SUBMIT_ARGS": "--master spark://dantooine10dot.memphis.edu:7077 pyspark-shell"
+  "PYSPARK_SUBMIT_ARGS": "--master local[*] pyspark-shell"
 
  }
 }
