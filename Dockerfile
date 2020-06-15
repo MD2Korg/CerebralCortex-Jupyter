@@ -13,7 +13,7 @@ ENV APACHE_SPARK_VERSION 3.0.0-preview2
 ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
-RUN pip3 install wheel pytz==2017.2 PyYAML==4.2b1 influxdb==5.0.0 pympler scipy numpy py4j
+RUN pip3 install wheel minio==2.2.4 pytz==2017.2 PyYAML==4.2b1 pyarrow==0.8.0 kafka influxdb==5.0.0 pympler scipy numpy py4j
 
 RUN cd /tmp && \
         wget -q http://apache.cs.utah.edu/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
@@ -37,7 +37,7 @@ RUN \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
 
-RUN pip install cerebralcortex-kernel==3.2.0.post3
+RUN pip install cerebralcortex-kernel==3.1.1.post3
 RUN pip install pennprov
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
