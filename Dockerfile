@@ -2,6 +2,7 @@ FROM jupyterhub/jupyterhub:1.1.0
 MAINTAINER Timothy Hnat twhnat@memphis.edu
 
 RUN apt-get -yqq update && \
+    apt-get install wget && \
     apt-get install -yqq openjdk-8-jre python3-setuptools libyaml-dev libev-dev liblapack-dev libsnappy-dev gcc g++ && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
@@ -28,8 +29,6 @@ ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
 ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 ENV HADOOP_HOME	   /opt/hadoop
-
-RUN apt update && apt install wget
 
 RUN \
   wget http://apache.mirrors.tds.net/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz && \
