@@ -29,6 +29,8 @@ ENV PYSPARK_PYTHON /opt/conda/bin/python3
 ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 ENV HADOOP_HOME	   /opt/hadoop
 
+RUN apt update && apt install wget
+
 RUN \
   wget http://apache.mirrors.tds.net/hadoop/common/hadoop-3.1.3/hadoop-3.1.3.tar.gz && \
     tar -xzf hadoop-3.1.3.tar.gz && \
