@@ -1,4 +1,4 @@
-FROM jupyterhub/jupyterhub:1.1.0
+FROM jupyterhub/jupyterhub:1.0
 MAINTAINER Timothy Hnat twhnat@memphis.edu
 
 RUN apt-get -yqq update && \
@@ -15,6 +15,10 @@ ENV HADOOP_VERSION 2.7
 
 RUN easy_install pip==9.0.3
 RUN pip3 install wheel pytz==2017.2 PyYAML==4.2b1 influxdb==5.0.0 pympler scipy numpy py4j
+
+RUN apt-get remove -y nodejs && apt-get update && \
+     curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+     apt-get install -y nodejs
 
 RUN cd /tmp && \
         wget -q http://apache.cs.utah.edu/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
@@ -60,16 +64,16 @@ RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seabor
 RUN jupyter labextension install nbdime-jupyterlab --no-build && \
     jupyter labextension install @jupyterlab/toc --no-build && \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
-    jupyter labextension install jupyterlab_bokeh --no-build && \
+    jupyter labextension install @bokeh/jupyter_bokeh --no-build && \
     jupyter labextension install bqplot --no-build && \
     jupyter labextension install @jupyterlab/vega3-extension --no-build && \
     jupyter labextension install @jupyterlab/git --no-build && \
     jupyter labextension install @jupyterlab/hub-extension --no-build && \
     jupyter labextension install jupyterlab_tensorboard --no-build && \
     jupyter labextension install jupyterlab-kernelspy --no-build && \
-    jupyter labextension install @jupyterlab/plotly-extension --no-build && \
-    #jupyter labextension install jupyterlab-chart-editor --no-build && \
-    #jupyter labextension install plotlywidget --no-build && \
+    jupyter labextension install jupyterlab-plotly --no-build && \
+    jupyter labextension install jupyterlab-chart-editor --no-build && \
+    jupyter labextension install plotlywidget --no-build && \
     jupyter labextension install @jupyterlab/latex --no-build && \
     jupyter labextension install jupyter-matplotlib --no-build && \
     jupyter labextension install jupyterlab-drawio --no-build && \
