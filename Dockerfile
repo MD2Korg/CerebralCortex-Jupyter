@@ -1,4 +1,4 @@
-FROM jupyterhub/jupyterhub:1.0
+FROM jupyterhub/jupyterhub:1.2
 MAINTAINER Timothy Hnat twhnat@memphis.edu
 
 RUN apt-get -yqq update && \
@@ -42,7 +42,7 @@ RUN \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc
 
 
-RUN pip install cerebralcortex-kernel==3.2.0.post3
+RUN pip install cerebralcortex-kernel==3.2.1
 RUN pip install pennprov
 RUN pip install --upgrade jupyterhub
 RUN pip install jupyter jupyterlab \
@@ -52,12 +52,12 @@ RUN pip install jupyter jupyterlab \
 RUN cd /usr/local/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}/python && \
     python3 setup.py install
 
-RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
-COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
+RUN mkdir /usr/local/share/jupyter/kernels/pyspark
+COPY pyspark/kernel.json /usr/local/share/jupyter/kernels/pyspark/
 
 RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
-RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seaborn ipyleaflet qgrid
+RUN pip install matplotlib sklearn ipywidgets gmaps plotly seaborn ipyleaflet qgrid
 
 
 
