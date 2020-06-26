@@ -60,7 +60,7 @@ RUN ln -s "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}" spark
 
 # Configure Spark
 ENV SPARK_HOME=/usr/local/spark
-ENV PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.7-src.zip \
+ENV PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.9-src.zip \
     SPARK_OPTS="--driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info" \
     PATH=$PATH:$SPARK_HOME/bin
 
@@ -70,7 +70,7 @@ RUN chmod 777 /data
 RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
 COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 
-RUN pip install cerebralcortex-kernel==3.2.1.post3 pennprov
+RUN pip install cerebralcortex-kernel==3.2.1.post4 pennprov
 
 USER $NB_UID
 
