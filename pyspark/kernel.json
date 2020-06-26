@@ -6,13 +6,15 @@
   "-f",
   "{connection_file}"
  ],
- "display_name": "pySpark (Python 3)",
+ "display_name": "pySpark (Python 3, Spark 3.0.0)",
  "language": "python",
  "env": {
+  "JAVA_HOME": "/usr/lib/jvm/java-8-openjdk-amd64",
   "SPARK_HOME": "/usr/local/spark",
-  "PYTHON_PATH": "/usr/local/spark/python/lib/py4j-0.10.4-src.zip:/usr/local/spark/python/",
+  "PYSPARK_PYTHON": "python3",
+  "PYTHON_PATH": "/usr/local/spark/python/lib/py4j-0.10.9-src.zip:/usr/local/spark/python/",
   "PYTHONSTARTUP": "/usr/local/spark/python/pyspark/shell.py",
-  "PYSPARK_SUBMIT_ARGS": "--master local[*] pyspark-shell",
-  "PYSPARK_PYTHON": "python3"
+  "PYSPARK_SUBMIT_ARGS": "--master local[*] pyspark-shell"
+
  }
 }
