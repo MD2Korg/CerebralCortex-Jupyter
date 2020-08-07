@@ -70,7 +70,7 @@ RUN chmod 777 /data
 RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
 COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 
-RUN pip install cerebralcortex-kernel==3.2.1.post4 pennprov
+RUN pip install cerebralcortex-kernel==3.3.0 pennprov
 
 USER $NB_UID
 
