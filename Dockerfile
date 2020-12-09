@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 USER root
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION=3.0.0 \
+ENV APACHE_SPARK_VERSION=3.0.1 \
     HADOOP_VERSION=2.7
 
 RUN apt-get -y update && \
@@ -73,8 +73,9 @@ RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
 COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 
 RUN pip install pennprov
+RUN pip install cerebralcortex-kernel
 
-RUN git clone https://github.com/MD2Korg/CerebralCortex-Kernel.git && cd CerebralCortex-Kernel && git checkout 3.3 && python3 setup.py install && cd .. && rm -r -f CerebralCortex-Kernel
+#RUN git clone https://github.com/MD2Korg/CerebralCortex-Kernel.git && cd CerebralCortex-Kernel && git checkout 3.3 && python3 setup.py install && cd .. && rm -r -f CerebralCortex-Kernel
 
 USER $NB_UID
 
