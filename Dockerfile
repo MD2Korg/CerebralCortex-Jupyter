@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 USER root
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION=3.0.0 \
+ENV APACHE_SPARK_VERSION=3.0.1 \
     HADOOP_VERSION=2.7
 
 RUN apt-get -y update && \
@@ -38,7 +38,7 @@ RUN jupyter labextension install nbdime-jupyterlab --no-build && \
     jupyter labextension install jupyter-leaflet --no-build && \
     jupyter labextension install qgrid --no-build
 
-RUN jupyter lab build && \
+RUN jupyter lab build --dev-build=False --minimize=False && \
     jupyter lab clean && \
     jlpm cache clean && \
     npm cache clean --force && \
@@ -49,10 +49,8 @@ RUN jupyter lab build && \
 # Using the preferred mirror to download Spark
 WORKDIR /tmp
 # hadolint ignore=SC2046
-RUN wget -q $(wget -qO- https://www.apache.org/dyn/closer.lua/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz\?as_json | \
-    python -c "import sys, json; content=json.load(sys.stdin); print(content['preferred']+content['path_info'])") && \
-    echo "f5652835094d9f69eb3260e20ca9c2d58e8bdf85a8ed15797549a518b23c862b75a329b38d4248f8427e4310718238c60fae0f9d1afb3c70fb390d3e9cce2e49 *spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" | sha512sum -c - && \
-    tar xzf "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" -C /usr/local --owner root --group root --no-same-owner && \
+RUN wget https://apache.osuosl.org/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
+RUN tar xzf "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" -C /usr/local --owner root --group root --no-same-owner && \
     rm "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz"
 
 WORKDIR /usr/local
@@ -60,6 +58,8 @@ RUN ln -s "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}" spark
 
 # Configure Spark
 ENV SPARK_HOME=/usr/local/spark
+ENV PYSPARK_PYTHON=/opt/conda/bin/python3
+ENV PYSPARK_DRIVER_PYTHON=/opt/conda/bin/python3
 ENV PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.9-src.zip \
     SPARK_OPTS="--driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info" \
     PATH=$PATH:$SPARK_HOME/bin
@@ -70,7 +70,10 @@ RUN chmod 777 /data
 RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
 COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 
-RUN pip install cerebralcortex-kernel==3.3.0 pennprov
+RUN pip install pennprov
+RUN pip install cerebralcortex-kernel
+
+#RUN git clone https://github.com/MD2Korg/CerebralCortex-Kernel.git && cd CerebralCortex-Kernel && git checkout 3.3 && python3 setup.py install && cd .. && rm -r -f CerebralCortex-Kernel
 
 USER $NB_UID
 
