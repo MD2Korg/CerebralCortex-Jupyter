@@ -73,61 +73,11 @@ COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 RUN pip install pennprov
 RUN pip install cerebralcortex-kernel
 
-#RUN git clone https://github.com/MD2Korg/CerebralCortex-Kernel.git && cd CerebralCortex-Kernel && git checkout 3.3 && python3 setup.py install && cd .. && rm -r -f CerebralCortex-Kernel
+RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
 USER $NB_UID
-
-# Install pyarrow
-# RUN conda install --quiet -y 'pyarrow' 'py4j' && \
-#     conda clean --all -f -y && \
-#     fix-permissions "${CONDA_DIR}" && \
-#     fix-permissions "/home/${NB_USER}"
 
 WORKDIR $HOME
 
 
 VOLUME /data
-
-
-
-
-
-
-
-
-
-# RUN apt-get -yqq update && \
-#     apt-get install wget && \
-#     apt-get install -yqq openjdk-8-jre python3-setuptools libyaml-dev libev-dev liblapack-dev libsnappy-dev gcc g++ && \
-#     apt-get clean && \
-#     rm -rf /var/lib/apt/lists/* && \
-#     rm -rf /tmp/*
-#
-# RUN pip3 install wheel pytz==2017.2 PyYAML==4.2b1 influxdb==5.0.0 pympler scipy numpy py4j
-#
-# RUN apt-get remove -y nodejs && apt-get update && \
-#      curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-#      apt-get install -y nodejs
-#
-#
-# ENV SPARK_HOME  /usr/local/spark
-# ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.4-src.zip
-# ENV SPARK_OPTS --driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info
-# ENV JAVA_HOME   /usr/lib/jvm/java-8-openjdk-amd64
-# ENV PYSPARK_PYTHON /opt/conda/bin/python3
-# ENV PATH        $JAVA_HOME/bin:$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
-#
-#
-#
-
-# RUN pip install jupyter jupyterlab \
-#     && jupyter nbextension enable --py widgetsnbextension \
-#     && jupyter serverextension enable --py jupyterlab
-#
-#
-# RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
-# COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
-#
-# RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
-#
-# RUN pip3 install matplotlib sklearn python-snappy ipywidgets gmaps plotly seaborn ipyleaflet qgrid
