@@ -19,32 +19,23 @@ RUN apt-get -y update && \
 
 RUN pip3 install --upgrade jupyterlab-git matplotlib sklearn python-snappy ipywidgets gmaps plotly seaborn ipyleaflet qgrid
 
-RUN jupyter labextension install nbdime-jupyterlab --no-build && \
-    # jupyter labextension install @jupyterlab/toc --no-build && \
-    # jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build && \
-    jupyter labextension install @bokeh/jupyter_bokeh --no-build && \
-    jupyter labextension install bqplot --no-build && \
-    # jupyter labextension install @jupyterlab/vega3-extension --no-build && \
-    jupyter labextension install @jupyterlab/git --no-build && \
-    # jupyter labextension install @jupyterlab/hub-extension --no-build && \
-    # jupyter labextension install jupyterlab_tensorboard --no-build && \
-    jupyter labextension install jupyterlab-kernelspy --no-build && \
+RUN jupyter labextension install jupyterlab-chart-editor --no-build && \
     jupyter labextension install jupyterlab-plotly --no-build && \
-    jupyter labextension install jupyterlab-chart-editor --no-build && \
     jupyter labextension install plotlywidget --no-build && \
-    # jupyter labextension install @jupyterlab/latex --no-build && \
-    jupyter labextension install jupyter-matplotlib --no-build && \
-    jupyter labextension install jupyterlab-drawio --no-build && \
-    jupyter labextension install jupyter-leaflet --no-build && \
-    jupyter labextension install qgrid --no-build
+    jupyter labextension install jupyter-matplotlib --no-build
 
-RUN jupyter lab build --dev-build=False --minimize=False && \
-    jupyter lab clean && \
-    jlpm cache clean && \
-    npm cache clean --force && \
-    rm -rf $HOME/.node-gyp && \
-    rm -rf $HOME/.local
 
+RUN jupyter lab build --dev-build=False --minimize=False
+RUN jupyter lab clean
+RUN jlpm cache clean
+RUN npm cache clean --force
+RUN rm -rf $HOME/.node-gyp
+RUN rm -rf $HOME/.local
+
+RUN pip3 install jupyter_bokeh \
+    && pip3 install bqplot \
+    && pip3 install --upgrade jupyterlab jupyterlab-git \
+    && pip3 install jupyterlab-kernelspy
 
 # Using the preferred mirror to download Spark
 WORKDIR /tmp
@@ -75,7 +66,7 @@ RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
 COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 
 RUN pip install pennprov
-RUN pip install cerebralcortex-kernel==3.3.15
+RUN pip install cerebralcortex-kernel==3.3.16
 
 RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
