@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 USER root
 
 # Spark dependencies
-ENV APACHE_SPARK_VERSION=3.0.1 \
+ENV APACHE_SPARK_VERSION=3.1.2 \
     HADOOP_VERSION=2.7
 
 RUN apt-get -y update && \
@@ -64,6 +64,9 @@ ENV PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.9-src.zip \
     SPARK_OPTS="--driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info" \
     PATH=$PATH:$SPARK_HOME/bin
 
+# this will let script know that code is running under md2k created docker image
+ENV MD2K_JUPYTER_NOTEBOOK=MD2K_JUPYTER_NOTEBOOK
+
 RUN mkdir /data
 RUN chmod 777 /data
 
@@ -71,7 +74,7 @@ RUN mkdir /opt/conda/share/jupyter/kernels/pyspark
 COPY pyspark/kernel.json /opt/conda/share/jupyter/kernels/pyspark/
 
 RUN pip install pennprov
-RUN pip install cerebralcortex-kernel
+RUN pip install cerebralcortex-kernel==3.3.15
 
 RUN useradd -m md2k && echo "md2k:md2k" | chpasswd
 
